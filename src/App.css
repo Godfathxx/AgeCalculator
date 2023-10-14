@@ -1,5 +1,12 @@
 .App {
+  font-family: sans-serif;
   text-align: center;
+}
+.blu{
+  color:white;
+  outline-width: 2px;
+  background-color:rgb(24, 46, 167);
+  outline-color:rgb(24, 46, 167);
 }
 
 .App-logo {

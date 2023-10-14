@@ -1,25 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import "./App.css";
+class AgeCalculator extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      inputDate: '',
+      age: null,
+    };
+  }
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  handleDateChange = (e) => {
+    this.setState({
+      inputDate: e.target.value,
+    });
+  };
+
+  calculateAge = () => {
+    const inputDate = new Date(this.state.inputDate);
+    const today = new Date();
+    const ageDiff = today - inputDate;
+    const ageDate = new Date(ageDiff);
+    const calculatedAge = Math.abs(ageDate.getUTCFullYear() - 1970);
+    this.setState({
+      age: calculatedAge,
+    });
+  };
+
+  render() {
+    return (
+      <center>
+      <div>
+        <label htmlFor="inputDate"><h1>Enter your birthdate</h1></label>
+        <input
+          type="date"
+          id="inputDate"
+          value={this.state.inputDate}
+          onChange={this.handleDateChange}
+        />
+        <br/>
+        <br/>
+        <button class="blu" onClick={this.calculateAge}>submit</button>
+        {this.state.age && <p><h3>Your age is {this.state.age} years.</h3></p>}
+      </div>
+      </center>
+    );
+  }
 }
 
-export default App;
+export default AgeCalculator;
